@@ -19,27 +19,36 @@ function getComputerChoice(min,max){
 
 //This is a single round of the game function
 function playRound(usrSelection, pcSelection){
+    const usrSel = usrSelection.toLowerCase(),
+          pcSel = pcSelection.toLowerCase();
+
     if(Boolean(usrSelection)){
-        if(usrSelection.toLowerCase() === pcSelection.toLowerCase()){
+        if(usrSel === pcSel){
             return console.log(`Draw! You both chose ${pcSelection}`), 'draw';
         } switch(true){
-            case usrSelection.toLowerCase() === 'rock' && pcSelection.toLowerCase() === 'paper':
-                return console.log('You Lost! Paper beats Rock'), false;
+            case usrSel === 'rock' && pcSel === 'paper':
+                return console.log('You Lost! Paper beats Rock'),
+                false;
                 break;
-            case usrSelection.toLowerCase() === 'rock' && pcSelection.toLowerCase() === 'scissors':
-                return console.log('You Won! Rock beats Scissors'), true;
+            case usrSel === 'rock' && pcSel === 'scissors':
+                return console.log('You Won! Rock beats Scissors'),
+                true;
                 break;
-            case usrSelection.toLowerCase() === 'paper' && pcSelection.toLowerCase() === 'rock':
-                return console.log('You Won! Paper beats Rock'), true;
+            case usrSel === 'paper' && pcSel === 'rock':
+                return console.log('You Won! Paper beats Rock'),
+                true;
                 break;
-            case usrSelection.toLowerCase() === 'paper' && pcSelection.toLowerCase() === 'scissors':
-                return console.log('You Lost! Scissors beats Paper'), false;
+            case usrSel === 'paper' && pcSel === 'scissors':
+                return console.log('You Lost! Scissors beats Paper'),
+                false;
                 break;
-            case usrSelection.toLowerCase() === 'scissors' && pcSelection.toLowerCase() === 'rock':
-                return console.log('You Lost! Rock beats Scissors'), false;
+            case usrSel === 'scissors' && pcSel === 'rock':
+                return console.log('You Lost! Rock beats Scissors'),
+                false;
                 break;
-            case usrSelection.toLowerCase() === 'scissors' && pcSelection.toLowerCase() === 'paper':
-                return console.log('You Won! Scissors beats Paper'), true;
+            case usrSel === 'scissors' && pcSel === 'paper':
+                return console.log('You Won! Scissors beats Paper'),
+                true;
         }
     }else alert('Round Missed!\nYou should write Rock, Paper or Scissors to play.');
 }
