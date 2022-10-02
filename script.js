@@ -2,7 +2,7 @@ const button=document.querySelector('button');
 
 button.addEventListener('click', () => game());
 
-//This functiont generates a random choice for the PC
+//This functiont generates a random choice for the PC between 3 options
 function getComputerChoice(min,max){
     const rndNumber = Math.floor(Math.random()*(max-min+1)+min);
     switch(rndNumber){
@@ -72,7 +72,7 @@ function game(){
             console.log(`Score: ${score}/5`);
         }
     }
-    //Using tenerary operators just for fun
+    //Using tenerary operators just to not forget that they exist
     score > 2.5? console.log('Congratz, You Won!'):
     score == 2.5? console.log('Wow it\'s a draw! Never happened before.'):
     console.log("You lost my firend, but don't worry life goes on.\nPeople have seen worse days.");
