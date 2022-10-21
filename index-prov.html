@@ -6,6 +6,11 @@
         <title>Rock Paper Scissors</title>
         <!-- <script src="./script.js" defer></script> -->
         <style>
+            :root{
+                --bright: #edc478;
+                --dark: hsla(39, 77%, 80%, 0.2)
+            }
+
             *{
                 box-sizing: border-box;
             }
@@ -13,13 +18,17 @@
             body{
                 margin: 0;
                 height: 100vh;
-                color:hsl(39, 77%, 70%);
+                color: var(--bright);
                 background-color: black;
                 font-family: arial, sans-serif;
                 text-align: center;
                 display: flex;
                 justify-content: center;
                 align-items: center;
+            }
+
+            h1{
+                font-size: 5rem;
             }
 
             h2{
@@ -31,15 +40,34 @@
                 padding: 0.5em 1em;
             }
 
-            button + button{
+            /* button + button{
                 margin-left: 10px;
                 margin-bottom: 15px;
+            } */
+
+            .buttons-container{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 32px;
+                margin: 24px;
             }
 
             .select{
                 width: 120px;
                 height: 100px;
                 padding: 16px;
+                border: 2px solid #edc47820;
+                background-color: var(--dark);
+                transition: box-shadow 0.1s,
+                    padding 0.1s;
+            }
+
+            .select:active{
+                box-shadow:
+                    inset 0 0 8px 2px #edc47820,
+                    inset 0 0 16px 2px #edc47820;
+                padding: 22px;
             }
 
             .select img{
@@ -56,21 +84,43 @@
 
             .game-play>*{
                 height: 100%;
-                background-color: rgb(245, 222, 179, 0.2);
+                background-color: var(--dark);
                 flex: 1;
+                font-size: 1.5rem;
+                padding-top: 16px;
+            }
+
+            .game-play .result{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0;
+            }
+
+            .result>img{
+                width: 50%;
             }
 
         </style>
     </head>
     <body>
         <div class="container">
+
+            <div class="buttons-container">
                 <button class="select"><img src="./Images/stone.png" alt="Rock"></button>
                 <button class="select"><img src="./Images/new-document.png" alt="Paper"></button>
                 <button class="select"><img src="./Images/scissors.png " alt="Scissors"></button>
+            </div>
             <div class="game-play">
-                <div></div>
-                <div></div>
-                <div></div>
+                <div>Player Score:
+                    <h1>0</h1>
+                </div>
+                <div class="result">
+                    <img src="./Images/cancel.png" alt="">
+                </div>
+                <div>Computer Score:
+                    <h1>0</h1>
+                </div>
             </div>
         </div>
     </body>

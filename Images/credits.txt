@@ -3,3 +3,4 @@
 <a href="https://www.flaticon.com/free-icons/scissors" title="scissors icons">Scissors icons created by Freepik - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/tick" title="tick icons">Tick icons created by Freepik - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/cross" title="cross icons">Cross icons created by Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/scale" title="scale icons">Scale icons created by monkik - Flaticon</a>
