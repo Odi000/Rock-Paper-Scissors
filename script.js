@@ -1,6 +1,23 @@
-const button=document.querySelector('button');
+const container = document.querySelector('div.container');
+const playBtn = document.querySelector('button');
+const title = document.querySelector('.container>h2');
 
-button.addEventListener('click', () => game());
+//The stage after you click the play button
+const gamePlay = document.createElement('div'),
+    rockBtn = document.createElement('button'),
+    paperBtn = document.createElement('button'),
+    scissorsBtn = document.createElement('button');
+
+gamePlay.classList.add('game-play');
+rockBtn.classList.add('rock');
+paperBtn.classList.add('paper');
+scissorsBtn.classList.add('scissors');
+
+rockBtn.textContent = 'Rock';
+paperBtn.textContent = 'Paper';
+scissorsBtn.textContent = 'Scissors';
+
+playBtn.addEventListener('click', () => game());
 
 //This functiont generates a random choice for the PC between 3 options
 function getComputerChoice(min,max){
@@ -19,61 +36,65 @@ function getComputerChoice(min,max){
 
 //This is a single round of the game function
 function playRound(usrSelection, pcSelection){
+    if(!usrSelection) return;
+    
     const usrSel = usrSelection.toLowerCase(),
           pcSel = pcSelection.toLowerCase();
 
-    if(Boolean(usrSelection)){
+
         if(usrSel === pcSel){
-            return console.log(`Draw! You both chose ${pcSelection}`), 'draw';
+            return console.log(`Draw! You both chose ${pcSelection}`), 0;
         } switch(true){
             case usrSel === 'rock' && pcSel === 'paper':
                 return console.log('You Lost! Paper beats Rock'),
-                false;
+                -1;
                 break;
             case usrSel === 'rock' && pcSel === 'scissors':
                 return console.log('You Won! Rock beats Scissors'),
-                true;
+                1;
                 break;
             case usrSel === 'paper' && pcSel === 'rock':
                 return console.log('You Won! Paper beats Rock'),
-                true;
+                1;
                 break;
             case usrSel === 'paper' && pcSel === 'scissors':
                 return console.log('You Lost! Scissors beats Paper'),
-                false;
+                -1;
                 break;
             case usrSel === 'scissors' && pcSel === 'rock':
                 return console.log('You Lost! Rock beats Scissors'),
-                false;
+                -1;
                 break;
             case usrSel === 'scissors' && pcSel === 'paper':
                 return console.log('You Won! Scissors beats Paper'),
-                true;
+                1;
+            default:
+                return alert('Round Missed!\nYou should write Rock, Paper or Scissors to play.');
         }
-    }else alert('Round Missed!\nYou should write Rock, Paper or Scissors to play.');
 }
 
 //Run the game function
 function game(){
-    let score = 0;
+    container.removeChild(playBtn);
+    container.removeChild(title);
 
-    for(let i=0; i<5; i++){
-        const usrChoice = prompt("Rock, Paper, Scissors, shoot!","");
-        const pcChoice = getComputerChoice(1,3);
-        const result = playRound(usrChoice,pcChoice);
+    container.appendChild(rockBtn);
+    container.appendChild(paperBtn);
+    container.appendChild(scissorsBtn);
 
-        if(result==='draw'){
-            score+=0.5;
-            console.log(`Score: ${score}/5`);
-        }else if(result){
-            score++
-            console.log(`Score: ${score}/5`);
-        }else{
-            console.log(`Score: ${score}/5`);
-        }
-    }
+    let playerScore = 0, pcScore = 0;
+
+    // while(playerScore < 5 && pcScore < 5){
+    //     // const usrChoice = prompt("Rock, Paper, Scissors, shoot!","");
+    //     const pcChoice = getComputerChoice(1,3);
+    //     const result = playRound(usrChoice,pcChoice);
+
+    //     if(result=== 1) playerScore++;
+    //     if(result === -1) pcScore++
+
+    //     console.log(`My Score:${playerScore} | PC Score:${pcScore}`);
+    // }
     //Using tenerary operators just to not forget that they exist
-    score > 2.5? console.log('Congratz, You Won!'):
-    score == 2.5? console.log('Wow it\'s a draw! Never happened before.'):
+    playerScore > pcScore? console.log('Congratz, You Won!'):
     console.log("You lost my firend, but don't worry life goes on.\nPeople have seen worse days.");
 }
