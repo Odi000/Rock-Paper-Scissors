@@ -138,7 +138,10 @@ button:active{
     font-size: 2rem;
     position: absolute;
     transform: translateX(-50%) translateY(50%);
-    transition: opacity 0.5s ease-in;
+    transition: box-shadow 0.1s,
+        padding 0.1s,
+        font-size 0.1s,
+        opacity 0.5s ease-in;
 }
 .play-again:active{
     font-size: 1.6rem;
