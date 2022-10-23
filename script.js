@@ -1,18 +1,21 @@
-//First screen
+//First screen Html Elements
 const container = document.querySelector('div.container');
 const playBtn = document.querySelector('button');
 const title = document.querySelector('.container>h2');
 
 //The stage after you click the play button
 
-//Buttons
+//RPS Buttons Elements
 const buttonsContainer = document.createElement('div'),
     rockBtn = document.createElement('button'),
     paperBtn = document.createElement('button'),
     scissorsBtn = document.createElement('button'),
     rockImg = document.createElement('img'),
     paperImg = document.createElement('img'),
-    scissorsImg = document.createElement('img');
+    scissorsImg = document.createElement('img'),
+    playAgainBtn = document.createElement('button');
+
+playAgainBtn.textContent = 'Play Again';
 
 rockBtn.appendChild(rockImg);
 paperBtn.appendChild(paperImg);
@@ -21,7 +24,9 @@ buttonsContainer.appendChild(rockBtn);
 buttonsContainer.appendChild(paperBtn);
 buttonsContainer.appendChild(scissorsBtn);
 
-//Game-Play div
+
+
+//Game-Play div Elements
 const gamePlay = document.createElement('div'),
     divUsr = document.createElement('div'),
     divResult = document.createElement('div'),
@@ -30,7 +35,8 @@ const gamePlay = document.createElement('div'),
     scoreDispPc = document.createElement('h1'),
     winImg = document.createElement('img'),
     loseImg = document.createElement('img'),
-    drawImg = document.createElement('img');
+    drawImg = document.createElement('img'),
+    para = document.createElement('p');
 
 divUsr.textContent = 'Player Score:';
 divPc.textContent = 'Computer Score:';
@@ -51,53 +57,36 @@ rockBtn.classList.add('select');
 paperBtn.classList.add('select');
 scissorsBtn.classList.add('select');
 divResult.classList.add('result');
+playAgainBtn.classList.add('play-again');
 
 rockBtn.name = 'rock';
 paperBtn.name = 'paper';
 scissorsBtn.name = 'scissors';
-
+playAgainBtn.disabled = true;
 //Img sources
 rockImg.src = './Images/stone.png';
 paperImg.src = './Images/new-document.png';
 scissorsImg.src = './Images/scissors.png';
-winImg.src = './Images/check.png'
-loseImg.src = './Images/cancel.png'
-drawImg.src = './Images/balance.png'
+winImg.src = './Images/check.png';
+loseImg.src = './Images/cancel.png';
+drawImg.src = './Images/balance.png';
 
+//Start
 playBtn.addEventListener('click', () => game());
 
-//This functiont generates a random choice for the PC between 3 options
-function getComputerChoice(min,max){
-    const rndNumber = Math.floor(Math.random()*(max-min+1)+min);
-    switch(rndNumber){
-        case 1:
-            return 'rock';
-        case 2:
-            return 'paper';
-        case 3:
-            return 'scissors';
-    }
-}
+const buttons = [rockBtn,paperBtn,scissorsBtn];
+// const buttons = document.querySelectorAll('.select');
+buttons.forEach(button => button.addEventListener('click', playRound));
 
-function getRoundWinner(usrChoice,pcChoice){
-    if(usrChoice === pcChoice){
-        return 0;
-    } switch(true){
-        case usrChoice === 'rock' && pcChoice === 'paper':
-            return -1;            
-        case usrChoice === 'rock' && pcChoice === 'scissors':
-            return 1;
-        case usrChoice === 'paper' && pcChoice === 'rock':
-            return 1;
-        case usrChoice === 'paper' && pcChoice === 'scissors':
-            return -1;
-        case usrChoice === 'scissors' && pcChoice === 'rock':
-            return -1;
-        case usrChoice === 'scissors' && pcChoice === 'paper':
-            return 1;
-        }
-}
+//Function that runs the game
+function game(){
+    container.removeChild(playBtn);
+    container.removeChild(title);
 
+    container.appendChild(buttonsContainer);
+    container.appendChild(gamePlay);
+    container.appendChild(playAgainBtn);
+}
 //This is a single round of the game function
 function playRound(){
     const usrChoice = this.name;
@@ -119,22 +108,68 @@ function playRound(){
     }
 
     if(playerScore === 5 || pcScore === 5) {
-        console.log('u ban pes pik');
+        buttons.forEach(button => button.disabled = 1);
+        divResult.innerHTML = '';
+        divResult.appendChild(para);
+        
+
+        if(playerScore > pcScore) {
+            para.textContent = 'You Won!';
+            divUsr.classList.toggle('winner');
+            playAgainBtn.disabled = false;
+        }else {
+            para.textContent = 'Game Over!';
+            divPc.classList.toggle('winner');
+            playAgainBtn.disabled = false;
+        }
+        para.classList.toggle('incline');
     }
 }
 
-//Run the game function
-function game(){
-    container.removeChild(playBtn);
-    container.removeChild(title);
-
-    container.appendChild(buttonsContainer);
-    container.appendChild(gamePlay);
-
-    const buttons = document.querySelectorAll('.select');
-    buttons.forEach(button => button.addEventListener('click', playRound))
+//This functiont generates a random choice for the PC between 3 options
+function getComputerChoice(min,max){
+    const rndNumber = Math.floor(Math.random()*(max-min+1)+min);
+    switch(rndNumber){
+        case 1:
+            return 'rock';
+        case 2:
+            return 'paper';
+        case 3:
+            return 'scissors';
+    }
 }
 
-drawImg.addEventListener('load', () => {
-    console.log('u loadingu');
-})
+//This function returns the winner of the round. 1 User won, 0 Draw, -1 PC won.
+function getRoundWinner(usrChoice,pcChoice){
+    if(usrChoice === pcChoice){
+        return 0;
+    } switch(true){
+        case usrChoice === 'rock' && pcChoice === 'paper':
+            return -1;            
+        case usrChoice === 'rock' && pcChoice === 'scissors':
+            return 1;
+        case usrChoice === 'paper' && pcChoice === 'rock':
+            return 1;
+        case usrChoice === 'paper' && pcChoice === 'scissors':
+            return -1;
+        case usrChoice === 'scissors' && pcChoice === 'rock':
+            return -1;
+        case usrChoice === 'scissors' && pcChoice === 'paper':
+            return 1;
+        }
+}
+
+//Play-Again Button
+playAgainBtn.addEventListener('click', playAgain)
+function playAgain(){
+    divUsr.classList.remove('winner');
+    divPc.classList.remove('winner');
+    scoreDispUsr.textContent = 0;
+    scoreDispPc.textContent = 0;
+    divResult.innerHTML = '';
+
+    rockBtn.disabled = false;
+    paperBtn.disabled = false;
+    scissorsBtn.disabled = false;
+    playAgainBtn.disabled = true;
+}

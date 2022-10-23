@@ -1,0 +1,149 @@
+@keyframes pop {
+    50% {
+        scale: 1.15;
+    }
+
+    to {
+        scale: 1;
+    }
+}
+
+@keyframes shake {
+    25%{
+        transform: rotate(12deg);
+    }
+    75%{
+        transform: rotate(-12deg);
+    }
+    to{
+        transform: rotate(0deg);
+    }
+}
+
+*, *::after, *::before{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    height: 100vh;
+    color:rgb(237, 196, 120);
+    background-color: black;
+    font-family: arial, sans-serif;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    font-size: 5rem;
+}
+
+h2{
+    font-size: 2.5rem;
+}
+
+button{
+    width: 165px;
+    height: 93px;
+    font-size: 2.5rem;
+    padding: 1.25rem 2.5rem;
+    border: 4px solid #edc47830;
+    border-radius: 4px;
+    color: rgb(237, 196, 120);
+    background-color: #f3d8a533;
+    transition: 
+        box-shadow 0.1s,
+        padding 0.1s,
+        font-size 0.1s;
+}
+
+button:active{
+    box-shadow:
+        inset 0 0 8px 2px #edc47820,
+        inset 0 0 16px 2px #edc47820;
+        font-size: 2rem;
+}
+
+.buttons-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    margin: 24px;
+}
+
+.select{
+    width: 120px;
+    height: 100px;
+    padding: 16px;
+    border: 2px solid #edc47820;
+}
+
+.select:active{
+    padding: 22px;
+}
+
+.select img{
+    height: 100%;
+}
+
+.game-play{
+    width: 740px;
+    height: 250px;
+    display: flex;
+    justify-content: space-between;
+    gap: 4px;
+}
+
+.game-play>*{
+    height: 100%;
+    background-color: rgb(245, 222, 179, 0.2);
+    border-radius: 5px;
+    flex: 1;
+    font-size: 1.5rem;
+    padding-top: 16px;
+    transition: box-shadow 0.2s;
+}
+
+.game-play .result{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.result>img{
+    width: 50%;
+    animation: pop 0.5s;
+}
+
+.result p{
+    font-weight: bold;
+    transition: transform 0.7s;
+    animation: shake 1.4s linear infinite;
+}
+
+.winner{
+    box-shadow:
+        0 0 6px 2px rgba(237, 196, 120, 0.5),
+        inset 0 0 8px 2px rgba(237, 196, 120, 0.2),
+        inset 0 0 16px 2px rgba(237, 196, 120, 0.2);
+}
+
+.play-again{
+    width: 240px;
+    height: 85px;
+    font-size: 2rem;
+    position: absolute;
+    transform: translateX(-50%) translateY(50%);
+    transition: opacity 0.5s ease-in;
+}
+.play-again:active{
+    font-size: 1.6rem;
+}
+
+.play-again:disabled{
+    opacity: 0;
+}

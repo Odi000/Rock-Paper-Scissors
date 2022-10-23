@@ -99,8 +99,58 @@
 
             .result>img{
                 width: 50%;
+                filter: drop-shadow(10px 10px 0 #000);
+                /* filter: drop-shadow(2px 4px 6px black); */
             }
 
+            .result p{
+                font-weight: bold;
+                transition: transform 0.7s;
+            }
+
+            
+            @keyframes shake {
+                50%{
+                    transform: rotate(-14deg);
+                }
+                to{
+                    transform: rotate(14deg);
+                }
+                /* 25%{
+                    transform: rotate(14deg);
+                }
+                75%{
+                    transform: rotate(-14deg);
+                } */
+            }
+
+            @keyframes pop {
+                50% {
+                    scale: 1.5;
+                }
+
+                to {
+                    scale: 1;
+                }
+            }
+            
+            p:hover{
+                transform: rotate(14deg);
+            }
+            p:active{
+                animation: shake 1.4s  infinite;
+            }
+
+            .container{
+                position: relative;
+            }
+
+            .replay{
+                /* width: 150px;
+                height: 75px; */
+                position: absolute;
+                transform: translateX(-50%) translateY(50%);
+            }
         </style>
     </head>
     <body>
@@ -116,12 +166,13 @@
                     <h1>0</h1>
                 </div>
                 <div class="result">
-                    <img src="./Images/cancel.png" alt="">
+                    <p>Game Over!</p>
                 </div>
                 <div>Computer Score:
                     <h1>0</h1>
                 </div>
             </div>
+            <button class="replay">Replay!</button>
         </div>
     </body>
 </html>
